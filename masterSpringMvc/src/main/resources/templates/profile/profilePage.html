@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Your Profile</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+	
+	<h2 class="indigo-text center" th:text="#{profile.profilePage.title}">Personal info</h2>
+	
+		<form th:action="@{/profile}" method="post" th:object="${profileForm}">
+			<!-- <ul th:if="${#fields.hasErrors('*')}">
+				<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+			</ul> -->
+				<div class="row">
+					<div class="col-md-6">
+					<div class="form-group">
+						<label for="twitterHandle" th:text="#{profile.profilePage.twitterHandle}">Twitter Handle</label> 
+						<input th:field="${profileForm.twitterHandle}"
+							th:errorclass="form-control-danger"
+							type="text" class="form-control" id="twitterHandle"
+							aria-describedby="twitterHandleHelp" placeholder="Twitter Handle" />
+						<div th:errors="*{twitterHandle}">Error</div>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<label for="emailId" th:text="#{profile.profilePage.email}">Email</label>
+						<input th:field="${profileForm.email}"
+							type="email" 
+							id="emailId" 
+							placeholder="Twitter Email"
+							class="form-control"/>
+						<!-- <small id="emailHelp" class="form-text text-muted">We'll
+							never share your email with anyone else.</small> -->
+						<div th:errors="*{email}">Error</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="birthDate" th:text="#{profile.profilePage.birthDate}">Birth Date</label> 
+						<input 
+							th:field="${profileForm.birthDate}"
+							th:placeholder="${dateFormat}"
+							type="text" 
+							class="form-control" 
+							id="birthDate" />
+						<div th:errors="*{birthDate}">Error</div>
+					</div>
+				</div>
+				<fieldset>
+					<legend th:text="#{tastes.legend}">What do you like?</legend>
+					<button type="submit" th:text="#{add.taste}" name="addTaste">Add</button>
+					<div th:each="row,rowStat : *{tastes}">
+						<input type="text" th:field="*{tastes[__${rowStat.index}__]}"/>
+						<button type="submit" th:text="#{remove}" th:value="${rowStat.index}" name="removeTaste" >Remove</button>
+					</div>
+				</fieldset>
+				<button type="submit" name="save" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

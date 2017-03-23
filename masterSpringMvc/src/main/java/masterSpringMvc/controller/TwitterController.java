@@ -46,5 +46,6 @@ public class TwitterController {
 		redirectAttributes.addAttribute("search", search);
 		return "forward:result";
 	}
+	
 
 }
