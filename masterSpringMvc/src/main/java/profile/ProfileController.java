@@ -1,4 +1,4 @@
-package masterSpringMvc.controller;
+package profile;
 
 import java.util.Locale;
 
@@ -49,5 +49,5 @@ public class ProfileController {
 		profileForm.getTastes().remove(rowId.intValue());
 		return "profile/profilePage";
 	}
-
+	
 }
