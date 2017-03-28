@@ -1,4 +1,4 @@
-package profile;
+package masterSpringMvc.profile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
