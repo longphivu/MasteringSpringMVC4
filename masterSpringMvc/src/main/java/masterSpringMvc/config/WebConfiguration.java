@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.util.UrlPathHelper;
 
 import masterSpringMvc.date.USLocalDateFormatter;
 
@@ -20,6 +22,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 		registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());
 	}
 
+	/*internationalization and localization*/
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new SessionLocaleResolver();
@@ -35,5 +38,13 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+	}
+	
+	/*matrix variable resolver*/
+	@Override
+	public void configurePathMatch(PathMatchConfigurer config) {
+		UrlPathHelper urlPathHelper = new UrlPathHelper();
+		urlPathHelper.setRemoveSemicolonContent(false);
+		config.setUrlPathHelper(urlPathHelper);
 	}
 }
