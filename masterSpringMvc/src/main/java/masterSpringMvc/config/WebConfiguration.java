@@ -2,6 +2,7 @@ package masterSpringMvc.config;
 
 import java.time.LocalDate;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UrlPathHelper;
 import masterSpringMvc.date.USLocalDateFormatter;
 
 @Configuration
+@EnableConfigurationProperties({PicturesUploadProperties.class})
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {

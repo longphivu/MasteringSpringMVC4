@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,7 +17,15 @@ public class UserProfileSession implements Serializable {
 	private String email;
 	private LocalDate birthDate;
 	private List<String> tastes = new ArrayList<>();
-
+	private Resource PicturePath;
+	
+	public Resource getPicturePath() {
+		return PicturePath;
+	}
+	public void setPicturePath(Resource picturePath) {
+		PicturePath = picturePath;
+	}
+	
 	public void saveForm(ProfileForm profileForm) {
 		this.twitterHandle = profileForm.getTwitterHandle();
 		this.email = profileForm.getEmail();
